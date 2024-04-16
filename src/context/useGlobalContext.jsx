@@ -1,23 +1,30 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 export const GlobalContext = createContext();
-const changeState = (state, action) => {
-  switch (action) {
+
+function changeState(state, action) {
+  switch (action.type) {
     case "CHANGE_COLOR":
-      return { ...state, navbarColor: action.payload };
+      return { ...state, navbarBgColor: action.payload };
     case "CHANGE_USER":
       return { ...state, user: action.payload };
     default:
       return state;
   }
-};
+}
 export function GlobalContextProvider({ children }) {
   const [state, dispatch] = useReducer(changeState, {
     user: null,
-    navbarColor: "red",
+    navbarBgColor: "base-300",
   });
-  dispatch({ type: "CHANGE_COLOR", payload: "green" });
+  useEffect(() => {
+    dispatch({
+      type: "CHANGE_COLOR",
+      payload: "base-300",
+    });
+  }, []);
   return (
-    <GlobalContext.Provider value={{ ...state }}>
+    <GlobalContext.Provider value={{ ...state ,dispatch}}>
+      {" "}
       {children}
     </GlobalContext.Provider>
   );
