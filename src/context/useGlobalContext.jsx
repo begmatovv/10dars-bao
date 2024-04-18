@@ -3,7 +3,7 @@ export const GlobalContext = createContext();
 
 function changeState(state, action) {
   switch (action.type) {
-    case "CHANGE_COLOR":
+    case "CHANGE_NAVBAR_BG":
       return { ...state, navbarBgColor: action.payload };
     case "CHANGE_USER":
       return { ...state, user: action.payload };
@@ -14,7 +14,7 @@ function changeState(state, action) {
 export function GlobalContextProvider({ children }) {
   const [state, dispatch] = useReducer(changeState, {
     user: null,
-    navbarBgColor: "base-300",
+    navbarBgColor: "",
   });
   useEffect(() => {
     dispatch({
