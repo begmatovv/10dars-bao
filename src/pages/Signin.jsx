@@ -1,7 +1,17 @@
-const Signin = () => {
+import { useSignup } from "../hooks/useSignup";
+import { FcGoogle } from "react-icons/fc";
+const Signup = () => {
+  const { signUpWithGoogle, user, err } = useSignup();
+  console.log(user);
   return (
-    <div>Signin</div>
-  )
-}
+    <div className="min-h-screen grid place-items-center">
+      <button onClick={signUpWithGoogle} className="btn btn-secondary">
+        <FcGoogle className="text-3xl" />
+        <span className="text-2xl">Google</span>
+      </button>
+      <a href="">Do you have an account?</a>
+    </div>
+  );
+};
 
-export default Signin
+export default Signup;
